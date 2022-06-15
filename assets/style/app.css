@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+	@apply text-base sm:text-xl md:text-2xl;
+}
+body,
+#__nuxt {
+	@apply text-gray-300 bg-[#1a191e] h-screen w-screen flex flex-col items-center text-center py-2 font-sans;
+}
