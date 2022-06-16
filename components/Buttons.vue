@@ -1,6 +1,8 @@
 <template>
   <section class="buttons">
-    <button><img src="~/assets/images/play.svg" alt="" /></button>
+    <button @click="emit('start-timer')">
+      <img src="~/assets/images/play.svg" alt="" />
+    </button>
     <button><img src="~/assets/images/pause.svg" alt="" /></button>
     <button><img src="~/assets/images/skip.svg" alt="" /></button>
     <button><img src="~/assets/images/reset.svg" alt="" /></button>
@@ -8,6 +10,7 @@
 </template>
 
 <script setup lang="ts">
+const emit = defineEmits(["start-timer"]);
 </script>
 
 <style lang="postcss" scoped>

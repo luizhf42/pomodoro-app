@@ -1,8 +1,8 @@
 <template>
   <h1>Pomodoro 🐢</h1>
   <main>
-    <Clock />
-    <Buttons />
+    <Clock :timer="timer?.value" :minutes="minutes" :seconds="seconds" />
+    <Buttons @start-timer="startTimer()" />
   </main>
 </template>
 
@@ -23,6 +23,20 @@ useHead({
     },
   ],
 });
+
+const timer = ref();
+const minutes = ref(25);
+const seconds = ref(0);
+
+const startTimer = () => {
+  timer.value = setInterval(() => {
+    seconds.value--;
+    if (seconds.value < 0) {
+      seconds.value = 59;
+      minutes.value--;
+    }
+  }, 1000);
+};
 </script>
 
 

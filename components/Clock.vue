@@ -1,7 +1,11 @@
 <template>
   <section class="clock-wrapper">
     <h3>Work Session</h3>
-    <h2>25:00</h2>
+    <h2>
+      {{ minutes < 10 ? `0${minutes}` : minutes }}:{{
+        seconds < 10 ? `0${seconds}` : seconds
+      }}
+    </h2>
     <div class="progress-bar">
       <div :style="[{ width: '10%' }]"></div>
       <span></span>
@@ -10,6 +14,13 @@
 </template>
 
 <script setup lang="ts">
+const props = defineProps({
+  timer: Function,
+  minutes: Number,
+  seconds: Number,
+});
+
+const clockTimer = props.timer;
 </script>
 
 <style lang="postcss" scoped>
