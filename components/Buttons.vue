@@ -7,12 +7,14 @@
       <img src="~/assets/images/pause.svg" alt="" />
     </button>
     <button><img src="~/assets/images/skip.svg" alt="" /></button>
-    <button><img src="~/assets/images/reset.svg" alt="" /></button>
+    <button @click="emit('reset-timer')">
+      <img src="~/assets/images/reset.svg" alt="" />
+    </button>
   </section>
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(["start-timer", "pause-timer"]);
+const emit = defineEmits(["start-timer", "pause-timer", "reset-timer"]);
 </script>
 
 <style lang="postcss" scoped>

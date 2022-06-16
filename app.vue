@@ -2,11 +2,16 @@
   <h1>Pomodoro 🐢</h1>
   <main>
     <Clock :timer="timer?.value" :minutes="minutes" :seconds="seconds" />
-    <Buttons @start-timer="startTimer()" @pause-timer="pauseTimer()" />
+    <Buttons
+      @start-timer="startTimer()"
+      @pause-timer="pauseTimer()"
+      @reset-timer="resetTimer()"
+    />
   </main>
 </template>
 
 <script lang="ts" setup>
+type Session = "Work" | "Break" | "Long Break";
 // @ts-ignore
 useHead({
   title: "LH's Pomodoro 🐢",
@@ -25,6 +30,7 @@ useHead({
 });
 
 const timer = ref();
+const session = ref<Session>("Work");
 const minutes = ref(25);
 const seconds = ref(0);
 
@@ -39,6 +45,21 @@ const startTimer = () => {
 };
 
 const pauseTimer = () => clearInterval(timer.value);
+const resetTimer = () => {
+  switch (session.value) {
+    case "Work":
+      minutes.value = 25;
+      break;
+    case "Break":
+      minutes.value = 5;
+      break;
+    case "Long Break":
+      minutes.value = 15;
+      break;
+  }
+  seconds.value = 0;
+  pauseTimer();
+};
 </script>
 
 
