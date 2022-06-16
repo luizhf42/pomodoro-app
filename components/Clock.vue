@@ -1,11 +1,7 @@
 <template>
   <section class="clock-wrapper">
     <h3>{{ session }} Session</h3>
-    <h2>
-      {{ minutes < 10 ? `0${minutes}` : minutes }}:{{
-        seconds < 10 ? `0${seconds}` : seconds
-      }}
-    </h2>
+    <h2>{{ formatMinutes() }}:{{ formatSeconds() }}</h2>
     <div class="progress-bar">
       <div :style="[{ width: defineBarWidth() + '%' }]"></div>
       <span></span>
@@ -20,6 +16,11 @@ const props = defineProps({
   seconds: Number,
   session: String,
 });
+
+const formatMinutes = () =>
+  props.minutes < 10 ? `0${props.minutes}` : props.minutes;
+const formatSeconds = () =>
+  props.seconds < 10 ? `0${props.seconds}` : props.seconds;
 
 const getInitialTimeInSeconds = () => {
   switch (props.session) {
