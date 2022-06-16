@@ -2,7 +2,7 @@
   <h1>Pomodoro 🐢</h1>
   <main>
     <Clock :timer="timer?.value" :minutes="minutes" :seconds="seconds" />
-    <Buttons @start-timer="startTimer()" />
+    <Buttons @start-timer="startTimer()" @pause-timer="pauseTimer()" />
   </main>
 </template>
 
@@ -37,6 +37,8 @@ const startTimer = () => {
     }
   }, 1000);
 };
+
+const pauseTimer = () => clearInterval(timer.value);
 </script>
 
 
