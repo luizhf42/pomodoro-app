@@ -7,7 +7,7 @@
       }}
     </h2>
     <div class="progress-bar">
-      <div :style="[{ width: '10%' }]"></div>
+      <div :style="[{ width: defineBarWidth() + '%' }]"></div>
       <span></span>
     </div>
   </section>
@@ -20,6 +20,24 @@ const props = defineProps({
   seconds: Number,
   session: String,
 });
+
+const getInitialTimeInSeconds = () => {
+  switch (props.session) {
+    case "Work":
+      return 25 * 60;
+    case "Break":
+      return 5 * 60;
+    case "Long Break":
+      return 15 * 60;
+  }
+};
+
+const defineBarWidth = () => {
+  const initialTimeInSeconds = getInitialTimeInSeconds();
+  const actualTimeInSeconds = props.minutes * 60 + props.seconds;
+  const widthPercentage = (actualTimeInSeconds / initialTimeInSeconds) * 100;
+  return widthPercentage;
+};
 
 const clockTimer = props.timer;
 </script>
@@ -44,7 +62,6 @@ h2 {
 }
 
 .progress-bar span {
-  @apply h-2 w-2 bg-green-500 rounded-full;
-  margin-left: -2px;
+  @apply h-2.5 aspect-square bg-green-500 rounded-full ml-[-2px] sm:ml-[-3px] md:ml-[-4px];
 }
 </style>
