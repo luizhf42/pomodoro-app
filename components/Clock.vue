@@ -1,6 +1,6 @@
 <template>
   <section class="clock-wrapper">
-    <h3>Work Session</h3>
+    <h3>{{ session }} Session</h3>
     <h2>
       {{ minutes < 10 ? `0${minutes}` : minutes }}:{{
         seconds < 10 ? `0${seconds}` : seconds
@@ -18,6 +18,7 @@ const props = defineProps({
   timer: Function,
   minutes: Number,
   seconds: Number,
+  session: String,
 });
 
 const clockTimer = props.timer;

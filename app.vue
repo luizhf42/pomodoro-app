@@ -1,7 +1,7 @@
 <template>
   <h1>Pomodoro 🐢</h1>
   <main>
-    <Clock :timer="timer?.value" :minutes="minutes" :seconds="seconds" />
+    <Clock :timer="timer?.value" :minutes="minutes" :seconds="seconds" :session="session" />
     <Buttons
       @start-timer="startTimer()"
       @pause-timer="pauseTimer()"
