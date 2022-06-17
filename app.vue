@@ -44,13 +44,16 @@ const breakSessionsCount = ref<number>(0);
 const startTimer = () => {
   timer.value = setInterval(() => {
     seconds.value--;
-    if (seconds.value < 0) {
-      seconds.value = 59;
-      minutes.value--;
-    }
-
+    changeSecondsTo59AtTheEndOfAMinute();
     checkIfSessionEnded();
   }, 1000);
+};
+
+const changeSecondsTo59AtTheEndOfAMinute = () => {
+  if (seconds.value < 0) {
+    seconds.value = 59;
+    minutes.value--;
+  }
 };
 
 const pauseTimer = () => clearInterval(timer.value);
