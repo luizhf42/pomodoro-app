@@ -39,8 +39,6 @@ const defineBarWidth = () => {
   const widthPercentage = (actualTimeInSeconds / initialTimeInSeconds) * 100;
   return widthPercentage;
 };
-
-const clockTimer = props.timer;
 </script>
 
 <style lang="postcss" scoped>
