@@ -1,9 +1,9 @@
 <template>
   <section class="buttons">
-    <button @click="emit('start-timer')">
+    <button @click="emit('start-timer')" v-show="timerIsPaused">
       <img src="~/assets/images/play.svg" alt="" />
     </button>
-    <button @click="emit('pause-timer')">
+    <button @click="emit('pause-timer')" v-show="!timerIsPaused">
       <img src="~/assets/images/pause.svg" alt="" />
     </button>
     <button @click="emit('skip-session')">
@@ -22,6 +22,10 @@ const emit = defineEmits([
   "skip-session",
   "reset-timer",
 ]);
+
+defineProps({
+  timerIsPaused: Boolean,
+});
 </script>
 
 <style lang="postcss" scoped>

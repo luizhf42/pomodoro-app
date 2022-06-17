@@ -8,6 +8,7 @@
       :session="session"
     />
     <Buttons
+      :timerIsPaused="timerIsPaused"
       @start-timer="startTimer()"
       @pause-timer="pauseTimer()"
       @skip-session="skipSession()"
@@ -37,12 +38,14 @@ useHead({
 });
 
 const timer = ref();
+const timerIsPaused = ref(true);
 const session = ref<Session>("Work");
 const minutes = ref<Minutes>(25);
 const seconds = ref<number>(0);
 const breakSessionsCount = ref<number>(0);
 
 const startTimer = () => {
+  timerIsPaused.value = false;
   timer.value = setInterval(() => {
     seconds.value--;
     changeSecondsTo59AtTheEndOfAMinute();
@@ -57,7 +60,10 @@ const changeSecondsTo59AtTheEndOfAMinute = () => {
   }
 };
 
-const pauseTimer = () => clearInterval(timer.value);
+const pauseTimer = () => {
+  timerIsPaused.value = true;
+  clearInterval(timer.value);
+};
 
 const checkIfSessionEnded = () => {
   // @ts-ignore
