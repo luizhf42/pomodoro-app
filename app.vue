@@ -73,7 +73,7 @@ const checkAndPassToNextSession = () => {
       ? passToNextSession("Long Break", 15)
       : passToNextSession("Break", 5);
   } else {
-    passToNextSession("Work", 15);
+    passToNextSession("Work", 25);
   }
 };
 
