@@ -85,9 +85,10 @@ const passToNextSession = (
   minutes.value = nextSessionMinutes;
 };
 
-// const skipSession = () => {
-//   checkAndPassToNextSession();
-// };
+const skipSession = () => {
+  checkAndPassToNextSession();
+  seconds.value = 0;
+};
 
 const resetTimer = () => {
   switch (session.value) {
