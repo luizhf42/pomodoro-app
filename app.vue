@@ -38,7 +38,7 @@ useHead({
 const timer = ref();
 const session = ref<Session>("Work");
 const minutes = ref<Minutes>(25);
-const seconds = ref<number>(10);
+const seconds = ref<number>(0);
 const breakSessionsCount = ref<number>(0);
 
 const startTimer = () => {
