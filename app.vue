@@ -69,7 +69,9 @@ const checkIfSessionEnded = () => {
 const checkAndPassToNextSession = () => {
   if (session.value == "Work") {
     breakSessionsCount.value++;
-    checkAndPassToNextSession();
+    breakSessionsCount.value % 4 == 0
+      ? passToNextSession("Long Break", 15)
+      : passToNextSession("Break", 5);
   } else {
     passToNextSession("Work", 15);
   }
@@ -83,10 +85,9 @@ const passToNextSession = (
   minutes.value = nextSessionMinutes;
 };
 
-const skipSession = () => {
-  if (session.value == "Work") {
-  }
-};
+// const skipSession = () => {
+//   checkAndPassToNextSession();
+// };
 
 const resetTimer = () => {
   switch (session.value) {
