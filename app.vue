@@ -10,6 +10,7 @@
     <Buttons
       @start-timer="startTimer()"
       @pause-timer="pauseTimer()"
+      @skip-session="skipSession()"
       @reset-timer="resetTimer()"
     />
   </main>
@@ -63,14 +64,17 @@ const checkIfSessionEnded = () => {
   if (seconds.value == 0 && minutes.value == 0) {
     if (session.value == "Work") {
       breakSessionsCount.value++;
-      breakSessionsCount.value % 4 == 0
-        ? passToNextSession("Long Break", 15)
-        : passToNextSession("Break", 5);
+      checkAndPassToNextBreakSession();
     } else {
       passToNextSession("Work", 15);
     }
   }
 };
+
+const checkAndPassToNextBreakSession = () =>
+  breakSessionsCount.value % 4 == 0
+    ? passToNextSession("Long Break", 15)
+    : passToNextSession("Break", 5);
 
 const passToNextSession = (
   nextSession: Session,
@@ -79,6 +83,11 @@ const passToNextSession = (
   session.value = nextSession;
   minutes.value = nextSessionMinutes;
 };
+
+// const skipSession = () => {
+//   if (session.value == "Work") {
+//   }
+// };
 
 const resetTimer = () => {
   switch (session.value) {
