@@ -1,7 +1,12 @@
 <template>
   <h1>Pomodoro 🐢</h1>
   <main>
-    <Clock :timer="timer?.value" :minutes="minutes" :seconds="seconds" :session="session" />
+    <Clock
+      :timer="timer?.value"
+      :minutes="minutes"
+      :seconds="seconds"
+      :session="session"
+    />
     <Buttons
       @start-timer="startTimer()"
       @pause-timer="pauseTimer()"
@@ -12,6 +17,7 @@
 
 <script lang="ts" setup>
 type Session = "Work" | "Break" | "Long Break";
+type Minutes = 25 | 5 | 15;
 // @ts-ignore
 useHead({
   title: "LH's Pomodoro 🐢",
@@ -31,8 +37,9 @@ useHead({
 
 const timer = ref();
 const session = ref<Session>("Work");
-const minutes = ref(25);
-const seconds = ref(0);
+const minutes = ref<Minutes>(25);
+const seconds = ref<number>(10);
+const breakSessionsCount = ref<number>(0);
 
 const startTimer = () => {
   timer.value = setInterval(() => {
@@ -41,10 +48,35 @@ const startTimer = () => {
       seconds.value = 59;
       minutes.value--;
     }
+
+    checkIfSessionEnded();
   }, 1000);
 };
 
 const pauseTimer = () => clearInterval(timer.value);
+
+const checkIfSessionEnded = () => {
+  // @ts-ignore
+  if (seconds.value == 0 && minutes.value == 0) {
+    if (session.value == "Work") {
+      breakSessionsCount.value++;
+      breakSessionsCount.value % 4 == 0
+        ? passToNextSession("Long Break", 15)
+        : passToNextSession("Break", 5);
+    } else {
+      passToNextSession("Work", 15);
+    }
+  }
+};
+
+const passToNextSession = (
+  nextSession: Session,
+  nextSessionMinutes: Minutes
+) => {
+  session.value = nextSession;
+  minutes.value = nextSessionMinutes;
+};
+
 const resetTimer = () => {
   switch (session.value) {
     case "Work":
