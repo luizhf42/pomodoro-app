@@ -62,19 +62,18 @@ const pauseTimer = () => clearInterval(timer.value);
 const checkIfSessionEnded = () => {
   // @ts-ignore
   if (seconds.value == 0 && minutes.value == 0) {
-    if (session.value == "Work") {
-      breakSessionsCount.value++;
-      checkAndPassToNextBreakSession();
-    } else {
-      passToNextSession("Work", 15);
-    }
+    checkAndPassToNextSession();
   }
 };
 
-const checkAndPassToNextBreakSession = () =>
-  breakSessionsCount.value % 4 == 0
-    ? passToNextSession("Long Break", 15)
-    : passToNextSession("Break", 5);
+const checkAndPassToNextSession = () => {
+  if (session.value == "Work") {
+    breakSessionsCount.value++;
+    checkAndPassToNextSession();
+  } else {
+    passToNextSession("Work", 15);
+  }
+};
 
 const passToNextSession = (
   nextSession: Session,
@@ -84,10 +83,10 @@ const passToNextSession = (
   minutes.value = nextSessionMinutes;
 };
 
-// const skipSession = () => {
-//   if (session.value == "Work") {
-//   }
-// };
+const skipSession = () => {
+  if (session.value == "Work") {
+  }
+};
 
 const resetTimer = () => {
   switch (session.value) {
