@@ -18,6 +18,8 @@
 </template>
 
 <script lang="ts" setup>
+// @ts-ignore
+import alarm from "./assets/alarm.mp3";
 type Session = "Work" | "Break" | "Long Break";
 type Minutes = 25 | 5 | 15;
 // @ts-ignore
@@ -68,6 +70,8 @@ const pauseTimer = () => {
 const checkIfSessionEnded = () => {
   // @ts-ignore
   if (seconds.value == 0 && minutes.value == 0) {
+    const alarmAudio = new Audio(alarm);
+    alarmAudio.play();
     checkAndPassToNextSession();
   }
 };
