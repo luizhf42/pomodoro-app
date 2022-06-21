@@ -1,4 +1,10 @@
 <template>
+  <Head>
+    <Title
+      >{{ session }} - {{ $minutes(minutes) }}:{{ $seconds(seconds) }} | LH's
+      Pomodoro</Title
+    >
+  </Head>
   <h1>Pomodoro 🐢</h1>
   <main>
     <Clock
@@ -20,11 +26,9 @@
 <script lang="ts" setup>
 // @ts-ignore
 import alarm from "./assets/alarm.mp3";
-type Session = "Work" | "Break" | "Long Break";
-type Minutes = 25 | 5 | 15;
+
 // @ts-ignore
 useHead({
-  title: "LH's Pomodoro 🐢",
   link: [
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
     {
@@ -39,6 +43,10 @@ useHead({
   ],
 });
 
+type Session = "Work" | "Break" | "Long Break";
+type Minutes = 25 | 5 | 15;
+
+const { $seconds, $minutes } = useNuxtApp();
 const timer = ref();
 const timerIsPaused = ref(true);
 const session = ref<Session>("Work");
