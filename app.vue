@@ -30,6 +30,7 @@ import alarm from "./assets/alarm.mp3";
 // @ts-ignore
 useHead({
   link: [
+    { rel: "icon", type: "image/x-icon", href: "/favicon.png" },
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
     {
       rel: "preconnect",
