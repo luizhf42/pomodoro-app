@@ -15,7 +15,7 @@
 
 ### The project
 
-It's a simple pomodoro app, with play, pause, skip session and reset buttons.
+It's a simple pomodoro app, with play, pause, skip session and reset buttons. It also plays an alarm every time a session change occurs.
 
 ### Screenshot
 
